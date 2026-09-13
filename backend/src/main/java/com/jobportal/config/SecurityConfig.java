@@ -103,7 +103,7 @@ public class SecurityConfig {
                 "http://localhost:3000",
 
                 // Replace this with your actual Vercel URL
-                "https://YOUR-FRONTEND.vercel.app"
+                "https://hire-flow-theta.vercel.app/"
         ));
 
         c.setAllowedMethods(List.of(
