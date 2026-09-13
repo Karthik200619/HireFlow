@@ -1,0 +1,1 @@
+export default function Modal({open,onClose,title,children}){if(!open)return null;return <div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&onClose()}><div className="modal"><div className="modalhead"><h3>{title}</h3><button onClick={onClose}>×</button></div>{children}</div></div>}

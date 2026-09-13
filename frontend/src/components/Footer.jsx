@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="site-footer"><div><b>HireFlow</b><span>Connect talent with opportunity.</span></div><span>© {new Date().getFullYear()} HireFlow. Built with React + Spring Boot.</span></footer>}

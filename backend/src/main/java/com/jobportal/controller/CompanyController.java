@@ -1,0 +1,7 @@
+package com.jobportal.controller;
+import com.jobportal.dto.CompanyDtos; import com.jobportal.entity.User; import com.jobportal.service.CompanyService; import jakarta.validation.Valid; import org.springframework.security.core.Authentication; import org.springframework.web.bind.annotation.*; import org.springframework.web.multipart.MultipartFile; import com.jobportal.repository.UserRepository; import java.util.*;
+@RestController @RequestMapping("/api/companies") public class CompanyController {private final CompanyService companies; private final UserRepository users; public CompanyController(CompanyService companies,UserRepository users){this.companies=companies;this.users=users;}
+ @GetMapping("/approved") public List<CompanyDtos.CompanyResponse> approved(){return companies.approved();}
+ @GetMapping("/{id}") public CompanyDtos.CompanyResponse get(@PathVariable Long id){return companies.response(companies.getApproved(id));}
+ @PostMapping(value="/request",consumes="multipart/form-data") public CompanyDtos.CompanyRequestResponse request(@RequestPart("data") String data,@RequestPart(value="image",required=false) MultipartFile image,Authentication a)throws Exception{CompanyDtos.CompanyRequest r=new com.fasterxml.jackson.databind.ObjectMapper().readValue(data,CompanyDtos.CompanyRequest.class);User u=users.findByEmail(a.getName()).orElseThrow();return companies.requestResponse(companies.submit(r,u,image));}
+}
